@@ -7,3 +7,9 @@ export interface Persona {
     cedula: string,
     esDoctor: boolean,
 }
+
+export interface Filtro {
+    nombre: string,
+    apellido: string,
+    tipo: string,
+}

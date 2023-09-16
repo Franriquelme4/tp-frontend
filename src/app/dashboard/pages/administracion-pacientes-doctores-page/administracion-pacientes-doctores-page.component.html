@@ -1,6 +1,18 @@
 <h1>Administracion Pacientes/Doctores</h1>
 <a class="btn btn-primary" routerLink="crear" >Agregar</a>
 <hr>
+<h4>Filtros</h4>
+<div class="d-flex">
+  <input class="form-control mx-2" type="text" placeholder="Nombre" [(ngModel)]="filtros.nombre">
+  <input class="form-control" type="text" placeholder="Apellido" [(ngModel)]="filtros.apellido">
+  <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.tipo">
+    <option value="todo" selected>Todos</option>
+    <option value="paciente">Pacientes</option>
+    <option value="doctor">Doctores</option>
+  </select>
+  <button class="btn btn-primary" (click)="filtrar()">Filtrar</button>
+</div>
+<hr>
 <table class="table">
   <thead>
     <tr>

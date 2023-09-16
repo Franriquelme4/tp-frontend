@@ -1,1 +1,39 @@
-<p>reserva-turnos-page works!</p>
+<h1>Reserva de turnos</h1>
+<a class="btn btn-primary" routerLink="crear" >Agregar</a>
+<hr>
+<h4>Filtros</h4>
+<div class="d-flex">
+  <input class="form-control mx-2" type="text" placeholder="Nombre" [(ngModel)]="filtros.nombre">
+  <input class="form-control" type="text" placeholder="Apellido" [(ngModel)]="filtros.apellido">
+  <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.tipo">
+    <option value="todo" selected>Todos</option>
+    <option value="paciente">Pacientes</option>
+    <option value="doctor">Doctores</option>
+  </select>
+  <button class="btn btn-primary" (click)="filtrar()">Filtrar</button>
+</div>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Doctor</th>
+      <th scope="col">Paciente</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Horario</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reserva of reservas">
+      <th>{{reserva.doctor.nombre}} {{reserva.doctor.apellido}}</th>
+      <th>{{reserva.paciente.nombre}} {{reserva.doctor.apellido}}</th>
+      <th>{{reserva.fecha}}</th>
+      <th>{{reserva.turno?.inicio}} - {{reserva.turno?.fin}}</th>
+      <th>{{reserva.estado}}</th>
+      <th>
+        <button type="button" (click)="cancelarTurno(reserva.id)" class="btn btn-sm btn-danger">Cancelar</button>
+      </th>
+    </tr>
+  </tbody>
+</table>

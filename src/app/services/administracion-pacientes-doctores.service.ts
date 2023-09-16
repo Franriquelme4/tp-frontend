@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Persona } from '../interfaces/administracion.interface';
+import { Filtro, Persona } from '../interfaces/administracion.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +52,23 @@ export class AdministracionPacientesDoctoresService {
       // Actualiza el sessionStorage con el array actualizado
       this.personas = personas;
     }
+  }
+
+  getPersonasFiltro(filtro:Filtro | any){
+    let personas = this.personas;
+    if(filtro.nombre){
+      personas = personas.filter((persona: any) => persona.nombre.toLowerCase().includes(filtro.nombre.toLowerCase()));
+    }
+    if(filtro.apellido){
+      personas = personas.filter((persona: any) => persona.apellido.toLowerCase().includes(filtro.apellido.toLowerCase()));
+    }
+    if(filtro.tipo !== 'todo'){
+      if(filtro.tipo === 'paciente'){
+        personas = personas.filter((persona: any) => persona.esDoctor === false);
+      }else{
+        personas = personas.filter((persona: any) => persona.esDoctor === true);
+      }
+    }
+    return personas;
   }
 }
