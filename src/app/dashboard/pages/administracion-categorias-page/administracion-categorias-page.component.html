@@ -4,4 +4,7 @@
         <input type="descripcion" class="form-control" id="descripcion" placeholder="Categoria" formControlName="descripcion">
         <button type="submit" class="btn btn-primary mt-3">Crear</button>
     </form>
+    <ul class="mt-5">
+        <li *ngFor="let categoria of categorias">{{categoria.description}}</li>
+    </ul>
 </div>
