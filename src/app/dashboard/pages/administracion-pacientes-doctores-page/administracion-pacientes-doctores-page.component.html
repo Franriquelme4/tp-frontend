@@ -4,29 +4,30 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Email</th>
+      <th scope="col">Cedula</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Es Doctor</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let persona of personas">
+      <th>{{persona.nombre}}</th>
+      <th>{{persona.apellido}}</th>
+      <th>{{persona.email}}</th>
+      <th>{{persona.cedula}}</th>
+      <th>{{persona.telefono}}</th>
+      <th>
+        <span *ngIf="!persona.esDoctor">PACIENTE</span>
+        <span *ngIf="persona.esDoctor">DOCTOR</span>
+      </th>
+      <th>
+        <a type="button" class="btn btn-sm btn-primary" routerLink="editar/{{persona.id}}">Editar</a>
+        <button type="button" (click)="eliminarPersona(persona.id)" class="btn btn-sm btn-danger">Eliminar</button>
+      </th>
     </tr>
   </tbody>
 </table>

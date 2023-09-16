@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdministracionPacientesDoctoresService } from '../../../../services/administracion-pacientes-doctores.service';
-
+import * as uuid from 'uuid';
 @Component({
   selector: 'app-administracion-pacientes-doctores-crear',
   templateUrl: './administracion-pacientes-doctores-crear.component.html',
@@ -27,6 +27,7 @@ export class AdministracionPacientesDoctoresCrearComponent {
 
   onSubmit() {
     if(this.form.invalid) return
+    this.admistracionService.setPersonaNueva({...this.form.value,id:uuid.v4()});
     const value = this.form.value;
     // Aquí puedes manejar la lógica de envío del formulario, como enviar los datos al servidor o realizar otras acciones.
     console.log(value);
