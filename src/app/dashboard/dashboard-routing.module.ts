@@ -17,6 +17,7 @@ const routes: Routes = [
     children: [
       {path:'categorias',component:AdministracionCategoriasPageComponent},
       {path:'pacientes-doctores',component:AdministracionPacientesDoctoresPageComponent},
+      {path:'categorias',component:AdministracionCategoriasPageComponent},
       {path:'pacientes-doctores/crear',component:AdministracionPacientesDoctoresCrearComponent},
       {path:'pacientes-doctores/editar/:id',component:AdministracionPacientesDoctoresEditarComponent},
       {path:'ficha-clinica',component:FichaClinicaPageComponent},

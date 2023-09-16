@@ -1,1 +1,7 @@
-<p>administracion-categorias-page works!</p>
+<div class="mb-3">
+    <form [formGroup]="categoriaForm" (ngSubmit)="crearForm()">
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <input type="descripcion" class="form-control" id="descripcion" placeholder="Categoria" formControlName="descripcion">
+        <button type="submit" class="btn btn-primary mt-3">Crear</button>
+    </form>
+</div>
