@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministracionPacientesDoctoresService } from '../../../services/administracion-pacientes-doctores.service';
-import { Filtro, Persona } from 'src/app/interfaces/administracion.interface';
+import { FiltroPersona, Persona } from 'src/app/interfaces/administracion.interface';
 
 @Component({
   selector: 'app-administracion-pacientes-doctores-page',
@@ -9,7 +9,7 @@ import { Filtro, Persona } from 'src/app/interfaces/administracion.interface';
 })
 export class AdministracionPacientesDoctoresPageComponent implements OnInit {
   personas:Persona[] = [];
-  filtros:Filtro = {
+  filtros:FiltroPersona = {
     nombre: '',
     apellido: '',
     tipo: 'todo',

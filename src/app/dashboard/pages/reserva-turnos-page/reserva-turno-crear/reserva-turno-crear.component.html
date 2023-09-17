@@ -29,7 +29,7 @@
       <label for="telefono">Horario</label>
       <select class="form-select" aria-label="Default select example" formControlName="turno">
         <option  selected disabled value="">Seleccionar horario</option>
-        <option *ngFor="let turno of turnos" [value]="turno.id">{{turno.inicio}} - {{turno.fin}}</option>
+        <option *ngFor="let turno of turnos" [value]="turno.id">{{turno.inicio}} a {{turno.fin}}</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary mt-2">Guardar</button>

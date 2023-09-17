@@ -8,7 +8,7 @@ export interface Persona {
     esDoctor: boolean,
 }
 
-export interface Filtro {
+export interface FiltroPersona {
     nombre: string,
     apellido: string,
     tipo: string,

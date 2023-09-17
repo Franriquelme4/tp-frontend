@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Filtro, Persona } from '../interfaces/administracion.interface';
+import { FiltroPersona, Persona } from '../interfaces/administracion.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +54,7 @@ export class AdministracionPacientesDoctoresService {
     }
   }
 
-  getPersonasFiltro(filtro:Filtro | any){
+  getPersonasFiltro(filtro:FiltroPersona | any){
     let personas = this.personas;
     if(filtro.nombre){
       personas = personas.filter((persona: any) => persona.nombre.toLowerCase().includes(filtro.nombre.toLowerCase()));

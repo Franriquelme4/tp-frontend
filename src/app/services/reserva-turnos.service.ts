@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ReservaTurno } from '../interfaces/reserva-turno.interface';
+import { FiltroReserva, ReservaTurno } from '../interfaces/reserva-turno.interface';
 
 
 @Injectable({
@@ -51,5 +51,35 @@ export class ReservaTurnosService {
     const reservaTurnos = this.obtenerReservaTurnos();
     const reservaTurno = reservaTurnos.find(cat => cat.id === id);
     return reservaTurno;
+  }
+  actualizarEstado(id:string){
+    const reservaTurnos = this.obtenerReservaTurnos();
+    const index = reservaTurnos.findIndex(p => p.id === id);
+    if (index !== -1) {
+      reservaTurnos[index].estado = 'cancelado';
+      this.reservaTurnosSubject.next(reservaTurnos);
+      this.guardarReservaTurnos(this.reservaTurnosSubject.value);
+    }
+  }
+
+  getReservaTurnosFiltro(filtro: FiltroReserva | any){
+    const reservaTurnos = this.obtenerReservaTurnos();
+    const reservaTurnosFiltro = reservaTurnos.filter(reservaTurno => {
+      let cumpleFiltro = true;
+      if(filtro.doctorId !== ''){
+        cumpleFiltro = cumpleFiltro && reservaTurno.doctor.id === filtro.doctorId;
+      }
+      if(filtro.pacienteId !== ''){
+        cumpleFiltro = cumpleFiltro && reservaTurno.paciente.id === filtro.pacienteId;
+      }
+      if(filtro.fechaDesde !== ''){
+        cumpleFiltro = cumpleFiltro && reservaTurno.fecha >= filtro.fechaDesde;
+      }
+      if(filtro.fechaHasta !== ''){
+        cumpleFiltro = cumpleFiltro && reservaTurno.fecha <= filtro.fechaHasta;
+      }
+      return cumpleFiltro;
+    });
+    return reservaTurnosFiltro;
   }
 }

@@ -3,14 +3,17 @@
 <hr>
 <h4>Filtros</h4>
 <div class="d-flex">
-  <input class="form-control mx-2" type="text" placeholder="Nombre" [(ngModel)]="filtros.nombre">
-  <input class="form-control" type="text" placeholder="Apellido" [(ngModel)]="filtros.apellido">
-  <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.tipo">
-    <option value="todo" selected>Todos</option>
-    <option value="paciente">Pacientes</option>
-    <option value="doctor">Doctores</option>
+  <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.doctorId">
+    <option  selected disabled value="">Seleccionar doctor</option>
+    <option *ngFor="let doctor of doctores" [value]="doctor.id">{{doctor.nombre}} {{doctor.apellido}}</option>
   </select>
-  <button class="btn btn-primary" (click)="filtrar()">Filtrar</button>
+  <select class="form-select" aria-label="Default select example" [(ngModel)]="filtros.pacienteId">
+    <option  selected disabled value="">Seleccionar paciente</option>
+    <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{paciente.nombre}} {{paciente.apellido}}</option>
+  </select>
+  <input [(ngModel)]="filtros.fechaDesde" type="date" class="form-control mx-2" id="fecha" name="fecha" placeholder="Fecha Desde" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha Desde">
+  <input [(ngModel)]="filtros.fechaHasta" type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha Hasta" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha Hasta">
+  <button class="btn btn-primary mx-2" (click)="filtrar()">Filtrar</button>
 </div>
 <hr>
 <table class="table">
@@ -27,7 +30,7 @@
   <tbody>
     <tr *ngFor="let reserva of reservas">
       <th>{{reserva.doctor.nombre}} {{reserva.doctor.apellido}}</th>
-      <th>{{reserva.paciente.nombre}} {{reserva.doctor.apellido}}</th>
+      <th>{{reserva.paciente.nombre}} {{reserva.paciente.apellido}}</th>
       <th>{{reserva.fecha}}</th>
       <th>{{reserva.turno?.inicio}} - {{reserva.turno?.fin}}</th>
       <th>{{reserva.estado}}</th>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Persona, Filtro } from 'src/app/interfaces/administracion.interface';
+import { Persona } from 'src/app/interfaces/administracion.interface';
 import { AdministracionPacientesDoctoresService } from 'src/app/services/administracion-pacientes-doctores.service';
 import { ReservaTurnosService } from '../../../services/reserva-turnos.service';
 import { ReservaTurno } from 'src/app/interfaces/reserva-turno.interface';
+import { FiltroReserva } from '../../../interfaces/reserva-turno.interface';
 
 @Component({
   selector: 'app-reserva-turnos-page',
@@ -10,31 +11,40 @@ import { ReservaTurno } from 'src/app/interfaces/reserva-turno.interface';
   styleUrls: ['./reserva-turnos-page.component.css']
 })
 export class ReservaTurnosPageComponent {
-  reservas:ReservaTurno[] = [];
-  filtros:Filtro = {
-    nombre: '',
-    apellido: '',
-    tipo: 'todo',
-  };
+  pacientes: Persona[] = [];
+  doctores: Persona[] = [];
+  reservas: ReservaTurno[] = [];
+  filtros: FiltroReserva = {
+    doctorId: '',
+    pacienteId: '',
+    fechaDesde: '',
+    fechaHasta: ''
+  }
 
   ngOnInit(): void {
-    this.reservas = this.reservaTurnoSrv.obtenerReservaTurnos();
-    console.log(this.reservas,'reservas');
-
-    // console.log(this.personas,'personas');
+    const fechaActual = new Date();
+    const año = fechaActual.getFullYear();
+    const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 al mes porque los meses comienzan desde 0
+    const dia = fechaActual.getDate().toString().padStart(2, '0');
+    const fechaFormateada = `${año}-${mes}-${dia}`;
+    this.filtros.fechaDesde = fechaFormateada;
+    this.filtros.fechaHasta = fechaFormateada;
+    this.reservas = this.reservaTurnoSrv.getReservaTurnosFiltro(this.filtros);
+    this.pacientes = this.service.getPersonasFiltro({ tipo: 'paciente' });
+    this.doctores = this.service.getPersonasFiltro({ tipo: 'doctor' });
   }
 
   constructor(
-    private service:AdministracionPacientesDoctoresService,
-    private reservaTurnoSrv:ReservaTurnosService
+    private service: AdministracionPacientesDoctoresService,
+    private reservaTurnoSrv: ReservaTurnosService
   ) { }
 
-  cancelarTurno(id:string){
-    // this.service.eliminarPersona(id);
-    // this.personas = this.service.personas;
+  cancelarTurno(id: string) {
+    this.reservaTurnoSrv.actualizarEstado(id);
+    this.reservas = this.reservaTurnoSrv.obtenerReservaTurnos();
   }
 
-  filtrar(){
-    // this.personas = this.service.getPersonasFiltro(this.filtros);
+  filtrar() {
+    this.reservas = this.reservaTurnoSrv.getReservaTurnosFiltro(this.filtros);
   }
 }

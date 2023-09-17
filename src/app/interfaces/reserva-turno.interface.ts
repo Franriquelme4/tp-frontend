@@ -6,8 +6,6 @@ export interface Turno{
   inicio: string,
   fin: string,
 }
-
-
 export interface ReservaTurno{
     id: string,
     paciente: Persona,
@@ -15,4 +13,11 @@ export interface ReservaTurno{
     fecha: string,
     turno: Turno,
     estado:string
+}
+
+export interface FiltroReserva {
+    doctorId: string,
+    pacienteId: string,
+    fechaDesde:string,
+    fechaHasta:string
 }
