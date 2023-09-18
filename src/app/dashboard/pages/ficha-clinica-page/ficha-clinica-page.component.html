@@ -1,8 +1,14 @@
 <h1>Ficha Clinica</h1>
-<a class="btn btn-primary" routerLink="crear" >Agregar</a>
+<a class="btn btn-primary mr-2" style="margin-right: 10px;" routerLink="crear">Agregar</a>
+<button class="btn btn-primary ml-2" (click)="exportexcel()">
+  <i class="fa fa-file-excel-o"></i> Exportar a Excel
+</button>
+
 <hr>
 <h4>Filtros</h4>
 <div class="d-flex">
+  
+  
     <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.doctorId">
         <option  selected disabled value="">Seleccionar doctor</option>
         <option *ngFor="let doctor of doctores" [value]="doctor.id">{{doctor.nombre}} {{doctor.apellido}}</option>
@@ -16,7 +22,7 @@
       <button class="btn btn-primary mx-2" (click)="filtrar()">Filtrar</button>
 </div>
 <hr>
-<table class="table">
+<table class="table" id="ficha-clinica-table">
   <thead>
     <tr>
       <th scope="col">Paciente</th>
@@ -35,8 +41,15 @@
         {{ficha.fecha}}
       </th>
       <th>
-        <button type="button" (click)="eliminarFicha(ficha.id)" class="btn btn-sm btn-danger">Eliminar</button>
+        <button type="button" (click)="eliminarFicha(ficha.id)" class="btn btn-sm btn-danger" style="margin-right: 5px;">Eliminar</button>
+        <button type="button" (click)="imprimirFicha(ficha)" class="btn btn-sm btn-primary">Imprimir</button>
+
       </th>
     </tr>
   </tbody>
 </table>
+
+<div #content >
+  <!-- Contenido que deseas exportar a PDF -->
+  <!-- Tu tabla, encabezados, etc. -->
+</div>
