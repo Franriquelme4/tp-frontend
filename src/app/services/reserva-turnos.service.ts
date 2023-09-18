@@ -47,6 +47,10 @@ export class ReservaTurnosService {
     this.guardarReservaTurnos(reservaTurnos);
   }
 
+  get ReservaTurnos(): ReservaTurno[]{
+    return this.obtenerReservaTurnos();
+  }
+
   encontrarReservaTurnoPorId(id: string): ReservaTurno | undefined{
     const reservaTurnos = this.obtenerReservaTurnos();
     const reservaTurno = reservaTurnos.find(cat => cat.id === id);

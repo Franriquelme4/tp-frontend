@@ -1,9 +1,20 @@
 <div class="container">
     <h2>Formulario de registro de fichas clinica</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" #formulario="ngForm">
-  
-  
+
+      <h3 class="my-5">Elegir turno</h3>
+
       <div class="form-group">
+        <label for="turno">Elegir un turno: (Opcional)</label>
+        <select class="form-select" aria-label="Default select example" formControlName="turno">
+          <option  selected disabled value="">Seleccionar Turno</option>
+          <option *ngFor="let turno of turnos" [value]="turno.id">Paciente {{turno.paciente.nombre}} - Dr. {{turno.doctor.nombre}} - ({{turno.turno.inicio}} al {{turno.turno.fin}})</option>
+        </select>
+      </div>
+
+      <h3 class="my-5" *ngIf="!form.value.turno">O rellenar manualmente</h3>
+  
+      <div class="form-group" *ngIf="!form.value.turno">
         <label for="doctor">Doctores</label>
         <select class="form-select" aria-label="Default select example" formControlName="doctor">
           <option  selected disabled value="">Seleccionar doctor</option>
@@ -12,7 +23,7 @@
       </div>
   
   
-      <div class="form-group">
+      <div class="form-group" *ngIf="!form.value.turno">
         <label for="paciente">Pacientes</label>
         <select class="form-select" aria-label="Default select example" formControlName="paciente">
           <option  selected disabled value="">Seleccionar paciente</option>
@@ -21,7 +32,7 @@
       </div>
   
   
-      <div class="form-group">
+      <div class="form-group" *ngIf="!form.value.turno">
         <label for="fecha">Selecciona una fecha:</label>
         <input type="date" class="form-control" id="fecha" name="fecha" formControlName="fecha">
       </div>
