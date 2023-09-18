@@ -9,6 +9,7 @@ import { ReportesPageComponent } from './pages/reportes-page/reportes-page.compo
 import { AdministracionPacientesDoctoresCrearComponent } from './pages/administracion-pacientes-doctores-page/administracion-pacientes-doctores-crear/administracion-pacientes-doctores-crear.component';
 import { AdministracionPacientesDoctoresEditarComponent } from './pages/administracion-pacientes-doctores-page/administracion-pacientes-doctores-editar/administracion-pacientes-doctores-editar.component';
 import { ReservaTurnoCrearComponent } from './pages/reserva-turnos-page/reserva-turno-crear/reserva-turno-crear.component';
+import { FichaClinicaCrearComponent } from './pages/ficha-clinica-page/ficha-clinica-crear/ficha-clinica-crear.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path:'pacientes-doctores/crear',component:AdministracionPacientesDoctoresCrearComponent},
       {path:'pacientes-doctores/editar/:id',component:AdministracionPacientesDoctoresEditarComponent},
       {path:'ficha-clinica',component:FichaClinicaPageComponent},
+      {path:'ficha-clinica/crear',component:FichaClinicaCrearComponent},
       {path:'reserva-turnos',component:ReservaTurnosPageComponent},
       {path:'reserva-turnos/crear',component:ReservaTurnoCrearComponent},
       {path:'reportes',component:ReportesPageComponent},

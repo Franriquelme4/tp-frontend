@@ -1,1 +1,42 @@
-<p>ficha-clinica-page works!</p>
+<h1>Ficha Clinica</h1>
+<a class="btn btn-primary" routerLink="crear" >Agregar</a>
+<hr>
+<h4>Filtros</h4>
+<div class="d-flex">
+    <select class="form-select mx-2" aria-label="Default select example" [(ngModel)]="filtros.doctorId">
+        <option  selected disabled value="">Seleccionar doctor</option>
+        <option *ngFor="let doctor of doctores" [value]="doctor.id">{{doctor.nombre}} {{doctor.apellido}}</option>
+      </select>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="filtros.pacienteId">
+        <option  selected disabled value="">Seleccionar paciente</option>
+        <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{paciente.nombre}} {{paciente.apellido}}</option>
+      </select>
+      <input [(ngModel)]="filtros.fechaDesde" type="date" class="form-control mx-2" id="fecha" name="fecha" placeholder="Fecha Desde" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha Desde">
+      <input [(ngModel)]="filtros.fechaHasta" type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha Hasta" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha Hasta">
+      <button class="btn btn-primary mx-2" (click)="filtrar()">Filtrar</button>
+</div>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Paciente</th>
+      <th scope="col">Diagnostico</th>
+      <th scope="col">Doctor</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ficha of fichas">
+      <th>{{ficha.paciente.nombre}} {{ficha.paciente.apellido}}</th>
+      <th>{{ficha.diagnostico}}</th>
+      <th>{{ficha.doctor.nombre}} {{ficha.doctor.apellido}}</th>
+      <th>
+        {{ficha.fecha}}
+      </th>
+      <th>
+        <button type="button" (click)="eliminarFicha(ficha.id)" class="btn btn-sm btn-danger">Eliminar</button>
+      </th>
+    </tr>
+  </tbody>
+</table>

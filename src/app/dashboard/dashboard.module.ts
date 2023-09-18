@@ -12,6 +12,7 @@ import { AdministracionPacientesDoctoresCrearComponent } from './pages/administr
 import { AdministracionPacientesDoctoresEditarComponent } from './pages/administracion-pacientes-doctores-page/administracion-pacientes-doctores-editar/administracion-pacientes-doctores-editar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservaTurnoCrearComponent } from './pages/reserva-turnos-page/reserva-turno-crear/reserva-turno-crear.component';
+import { FichaClinicaCrearComponent } from './pages/ficha-clinica-page/ficha-clinica-crear/ficha-clinica-crear.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ReservaTurnoCrearComponent } from './pages/reserva-turnos-page/reserva-
     ReportesPageComponent,
     AdministracionPacientesDoctoresCrearComponent,
     AdministracionPacientesDoctoresEditarComponent,
-    ReservaTurnoCrearComponent
+    ReservaTurnoCrearComponent,
+    FichaClinicaCrearComponent,
   ],
   imports: [
     CommonModule,
