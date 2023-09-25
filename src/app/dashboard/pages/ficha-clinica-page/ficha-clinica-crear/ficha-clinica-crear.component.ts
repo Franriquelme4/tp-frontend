@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/interfaces/administracion.interface';
+import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { FichaClinica } from 'src/app/interfaces/ficha-clinica.interface';
 import { ReservaTurno } from 'src/app/interfaces/reserva-turno.interface';
 import { AdministracionPacientesDoctoresService } from 'src/app/services/administracion-pacientes-doctores.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { FichaClinicaService } from 'src/app/services/ficha-clinica.service';
 import { ReservaTurnosService } from 'src/app/services/reserva-turnos.service';
 import * as uuid from 'uuid';
@@ -18,6 +20,7 @@ export class FichaClinicaCrearComponent {
   pacientes:Persona[] = [];
   doctores:Persona[] = [];
   turnos: ReservaTurno[] = [];
+  categorias: Categoria[] = [];
   public form:FormGroup;
   
   constructor(
@@ -25,6 +28,7 @@ export class FichaClinicaCrearComponent {
     private personaService:AdministracionPacientesDoctoresService,
     private fichaClinicaSvc: FichaClinicaService,
     private reservaTurnosSvc: ReservaTurnosService,
+    private categoriasSvc: CategoriaService,
     private route:Router
   ) {
     this.form = this.fb.group({
@@ -32,7 +36,8 @@ export class FichaClinicaCrearComponent {
       doctor:'',
       fecha: '',
       diagnostico: ['',Validators.required],
-      turno: undefined
+      turno: undefined,
+      categoria: ''
     });
   }
    
@@ -40,6 +45,7 @@ export class FichaClinicaCrearComponent {
     this.pacientes = this.personaService.getPersonasFiltro({tipo:'paciente'});
     this.doctores = this.personaService.getPersonasFiltro({tipo:'doctor'});
     this.turnos = this.reservaTurnosSvc.ReservaTurnos;
+    this.categorias = this.categoriasSvc.obtenerCategorias();
   }
 
   onSubmit(): void{
@@ -47,7 +53,7 @@ export class FichaClinicaCrearComponent {
     const value = this.form.value;
     let valueRequest: FichaClinica | undefined;
 
-    console.log(value);
+    console.log(value.categoria)
 
     if(!value.turno){
       valueRequest = {
@@ -55,6 +61,7 @@ export class FichaClinicaCrearComponent {
         id:uuid.v4(),
         paciente:this.personaService.encontrarPersonaPorId(value.paciente),
         doctor:this.personaService.encontrarPersonaPorId(value.doctor),
+        categoria:this.categoriasSvc.encontrarCategoriaPorId(value.categoria),
       } as FichaClinica
 
       this.fichaClinicaSvc.crearFichaClinica(valueRequest);
@@ -67,6 +74,7 @@ export class FichaClinicaCrearComponent {
         paciente:turnoSeleccionado.paciente,
         doctor:turnoSeleccionado.doctor,
         fecha: turnoSeleccionado.fecha,
+        categoria:this.categoriasSvc.encontrarCategoriaPorId(value.categoria),
         diagnostico: value.diagnostico
       } as FichaClinica
 
