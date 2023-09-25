@@ -72,3 +72,6 @@ export class AdministracionPacientesDoctoresService {
     return personas;
   }
 }
+
+export class AdministracionCategoriaService {
+}

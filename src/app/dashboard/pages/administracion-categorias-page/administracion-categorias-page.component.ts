@@ -16,7 +16,7 @@ export class AdministracionCategoriasPageComponent {
   });
 
   categorias$ = this.categoriasSvc.categorias$;
-  categorias: Categoria[] = [] 
+  categorias: Categoria[] = []
 
   constructor(private categoriasSvc: CategoriaService){}
 
@@ -28,4 +28,18 @@ export class AdministracionCategoriasPageComponent {
   crearForm(){
     this.categoriasSvc.setCategoriaNueva({id: uuid.v4(), description: this.categoriaForm.value.descripcion ?? ""})
   }
+
+  eliminarCat(id: string){
+    this.categoriasSvc.eliminarCategoria(id)
+  }
+
+  editarCat(id: string, descripcion:string){
+    // this.categoriasSvc.editarCategoria(id,descripcion)
+  }
+
+
+
+
+
+
 }

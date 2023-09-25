@@ -36,6 +36,26 @@ export class CategoriaService {
     this.guardarCategorias(this.categoriasSubject.value);
   }
 
+  eliminarCategoria(idCategoria: string): void{
+    const categorias = this.obtenerCategorias();
+    const nuevasCategorias = categorias.filter(cat => cat.id !== idCategoria)
+    this.categoriasSubject.next(nuevasCategorias);
+    this.guardarCategorias(this.categoriasSubject.value);
+  }
+
+  editarCategoria(categoria: Categoria) {
+    const categorias = this.obtenerCategorias();
+    console.log(categoria,categoria);
+    const index = categorias.findIndex(p => p.id === categoria.id);
+    console.log(index);
+    if (index !== -1) {
+      console.log('index', index);
+      // Actualiza la persona en el array de personas
+      categorias[index] = categoria;
+      // Actualiza el sessionStorage con el array actualizado
+      this.categorias = categorias;
+    }
+  }
   set categorias(categorias: Categoria[]){
     this.guardarCategorias(categorias);
   }
@@ -45,4 +65,7 @@ export class CategoriaService {
     const categoria = categorias.find(cat => cat.id === id);
     return categoria;
   }
+}
+
+export class AdministracionCategoriaService {
 }
