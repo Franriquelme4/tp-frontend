@@ -1,4 +1,5 @@
 import { Persona } from "./administracion.interface";
+import { Categoria } from "./categoria.interface";
 
 export interface FichaClinica {
     id: string,
@@ -6,4 +7,5 @@ export interface FichaClinica {
     doctor: Persona,
     fecha: string,
     diagnostico: string,
+    categoria: Categoria
 }
